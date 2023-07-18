@@ -1,0 +1,27 @@
+pipeline{
+agent any
+      prallel {
+          stage "Sonar Scan"{
+          state
+           {
+           echo "sonar scan"
+           }
+          }
+          stage "Some other scans"{
+          state
+           {
+          echo "some other scan"
+           }
+          }
+          stage " Trivy Scan" {
+          state {
+          echo "Trivy scan"
+            }
+          }
+        }
+stages "Deploy jobs"
+    stage{
+    state{
+    echo "deploying jobs"
+    }
+}
