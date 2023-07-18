@@ -1,27 +1,26 @@
 pipeline{
-agent any
-      prallel {
-          stage "Sonar Scan"{
-          state
-           {
-           echo "sonar scan"
-           }
+agent none
+ stages {
+     stage ('Parallel Scans'){
+         parallel{
+              stage ('Sonar Scans')
+               {
+               steps{
+                 echo "Sonar Scans"
+                   }
+               }
+           stage ('Trivy Scans'){
+          steps{
+                echo "Trivy Scans"
+               }
           }
-          stage "Some other scans"{
-          state
-           {
-          echo "some other scan"
-           }
-          }
-          stage " Trivy Scan" {
-          state {
-          echo "Trivy scan"
-            }
-          }
-        }
-stages "Deploy jobs"
-    stage{
-    state{
-    echo "deploying jobs"
+     }
     }
+     stage ('Deploy jobs'){
+       steps{
+            echo "deploying jobs"
+           }
+         }
+     }
 }
+
